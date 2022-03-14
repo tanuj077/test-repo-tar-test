@@ -1,0 +1,17 @@
+name: test
+
+on: [ push, workflow_dispatch ]
+
+
+jobs:
+  test_api:
+    runs-on: ubuntu-latest 
+    permissions:
+      contents: read
+    steps:
+      - name: Pull a release using REST API
+        run: |
+          curl --request GET \
+          --url https://api.github.com/repos/LDC-Developers/LDC/releases/tags/CI \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
+          ls
