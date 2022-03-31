@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v3.0.1
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
-          path: text
+          path: ~/text
           # An explicit key for restoring and saving the cache
           key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfladjf
       - name: retreive
@@ -25,6 +25,7 @@ jobs:
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: text
+          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
           # An explicit key for restoring and saving the cache
           restore-keys: |
             vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
