@@ -28,10 +28,10 @@ jobs:
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: text
-          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
+          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakl
           # An explicit key for restoring and saving the cache
           restore-keys: |
-            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
+            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfak
             vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-
       - name: test response
         run: |
