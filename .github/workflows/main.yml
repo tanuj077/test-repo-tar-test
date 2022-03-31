@@ -12,7 +12,7 @@ jobs:
       - name: Pull a release using REST API
         run: |
           touch text
-          echo "soehting" > text
+          echo "soehting ahah" > text
       - name: Cache
         uses: actions/cache@v3.0.1
         with:
@@ -20,11 +20,14 @@ jobs:
           path: ~/text
           # An explicit key for restoring and saving the cache
           key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfladjf
+      - name: Delete
+        run: |
+          rm -f text
       - name: retreive
         uses: actions/cache@v3.0.1
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
-          path: text2
+          path: text
           key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
           # An explicit key for restoring and saving the cache
           restore-keys: |
@@ -32,4 +35,4 @@ jobs:
             vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-
       - name: test response
         run: |
-          cat text text2
+          cat text
