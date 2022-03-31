@@ -11,7 +11,21 @@ jobs:
     steps:
       - name: Pull a release using REST API
         run: |
-          curl --request GET \
-          --url https://api.github.com/repos/LDC-Developers/LDC/releases/tags/CI \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}'
-          ls
+          touch text
+          echo "soehting" > text
+      - name: Cache
+        uses: actions/cache@v3.0.1
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: text
+          # An explicit key for restoring and saving the cache
+          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfladjf
+      - name: retreive
+        uses: actions/cache@v3.0.1
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: text
+          # An explicit key for restoring and saving the cache
+          restore-keys: |
+            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
+            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-
