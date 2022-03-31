@@ -30,3 +30,4 @@ jobs:
           restore-keys: |
             vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakldfj
             vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-
+            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfladjf
