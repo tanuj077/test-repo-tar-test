@@ -6,6 +6,8 @@ on: [ push, workflow_dispatch ]
 jobs:
   test_api:
     runs-on: ubuntu-latest 
+    container:
+      image: alpine
     permissions:
       contents: read
     steps:
@@ -19,7 +21,7 @@ jobs:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/text
           # An explicit key for restoring and saving the cache
-          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfljhjn
+          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfljhj
       - name: Delete
         run: |
           rm -f text
@@ -28,11 +30,7 @@ jobs:
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: text
-          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfakl
-          # An explicit key for restoring and saving the cache
-          restore-keys: |
-            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-klsdjfak
-            vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-
+          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfljhj
       - name: test response
         run: |
           cat text
