@@ -6,7 +6,7 @@ on: [ push, workflow_dispatch ]
 jobs:
   e2e-job:
     runs-on: ubuntu-latest
-#     container: python:3.9
+    container: ubuntu
     services:
       elasticsearch:
         image: elasticsearch:7.14.1
@@ -22,7 +22,7 @@ jobs:
       - name: Cache pip dependencies
         uses: actions/cache@v3
         env:
-          cache-name: cache-pip-dependencies-5
+          cache-name: cache-pip-dependencies-6
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
