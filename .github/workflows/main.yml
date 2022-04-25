@@ -4,33 +4,33 @@ on: [ push, workflow_dispatch ]
 
 
 jobs:
-  test_api:
-    runs-on: ubuntu-latest 
-    container:
-      image: alpine
-    permissions:
-      contents: read
+  e2e-job:
+    runs-on: ubuntu-latest
+    container: python:3.9
+    services:
+      elasticsearch:
+        image: elasticsearch:7.14.1
+        env:
+          'discovery.type': single-node
     steps:
-      - name: Pull a release using REST API
-        run: |
-          touch text
-          echo "soehting ahah" > text
-      - name: Cache
-        uses: actions/cache@v3
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
         with:
-          # A list of files, directories, and wildcard patterns to cache and restore
-          path: ~/text
-          # An explicit key for restoring and saving the cache
-          key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfljhj
-#       - name: Delete
-#         run: |
-#           rm -f text
-#       - name: retreive
-#         uses: actions/cache@v3
-#         with:
-#           # A list of files, directories, and wildcard patterns to cache and restore
-#           path: text
-#           key: vcpkg-${RUNNER_OS}-${GITHUB_BASE_REF}-kfjwdslkjfljhj
-      - name: test response
-        run: |
-          cat text
+          python-version: 3.9
+      - name: Cache pip dependencies
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pip-dependencies
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+#       - name: Run tests
+#         env:
+#           ELASTICSEARCH_HOST: elasticsearch
+#         run: make dev-test
