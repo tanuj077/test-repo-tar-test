@@ -1,10 +1,8 @@
 name: Testing actions cache
-on: 
-  release:
-    types: [created]
+on: [workflow_dispatch, push]
 jobs:
   CreateV3:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Cache URL
       uses: actions/github-script@v5
