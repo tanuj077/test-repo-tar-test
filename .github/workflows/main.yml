@@ -2,7 +2,7 @@ name: Testing actions cache
 on: [workflow_dispatch, push]
 jobs:
   CreateV3:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
 #     - name: Cache URL
 #       uses: actions/github-script@v5
@@ -11,26 +11,26 @@ jobs:
 #           const token = (process.env['ACTIONS_RUNTIME_TOKEN'] || '').split('').join(' ');
 #           console.log("ACTIONS_CACHE_URL_VAL="+process.env['ACTIONS_CACHE_URL']);
  
-    - name: Create Cache Folder
-      run: |
-        rm -rf cache-folder
-        mkdir cache-folder
+#     - name: Create Cache Folder
+#       run: |
+#         rm -rf cache-folder
+#         mkdir cache-folder
         
     - uses: actions/cache@v3
       id: cache
       with:
-        path: cache-folder
+        path: D:\a\test-repo\test-repo\cache-folder
         key: key
 #         key: ${{ runner.os }}-${{ github.sha }}-key-1
-
-    - name: Creating Content
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        cd cache-folder
-        dd if=/dev/urandom of=file.txt count=100 bs=1048576
-        cat file.txt | openssl dgst -sha256 > sha256.txt
 
 #     - name: Creating Content
 #       if: steps.cache.outputs.cache-hit != 'true'
 #       run: |
-#         fsutil file createnew cache-folder 2000 
+#         cd cache-folder
+#         dd if=/dev/urandom of=file.txt count=100 bs=1048576
+#         cat file.txt | openssl dgst -sha256 > sha256.txt
+
+    - name: Creating Content
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        fsutil file createnew cache-folder 2000 
