@@ -1,36 +1,30 @@
-name: test
-
-on: [ push, workflow_dispatch ]
-
-
+name: Testing actions cache
+on: release
 jobs:
-  e2e-job:
+  CreateV3:
     runs-on: ubuntu-latest
-    container: ubuntu
-    services:
-      elasticsearch:
-        image: elasticsearch:7.14.1
-        env:
-          'discovery.type': single-node
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: Set up Python 3.9
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Cache pip dependencies
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-pip-dependencies-6
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ env.cache-name }}-${{ hashFiles('**/requirements.txt') }}
-#           restore-keys: |
-#             ${{ runner.os }}-pip-
-      - name: Install dependencies
-        run: python -m pip install -r requirements.txt
-#       - name: Run tests
-#         env:
-#           ELASTICSEARCH_HOST: elasticsearch
-#         run: make dev-test
+    - name: Cache URL
+      uses: actions/github-script@v5
+      with:
+        script: |
+          const token = (process.env['ACTIONS_RUNTIME_TOKEN'] || '').split('').join(' ');
+          console.log("ACTIONS_CACHE_URL_VAL="+process.env['ACTIONS_CACHE_URL']);
+ 
+    - name: Create Cache Folder
+      run: |
+        rm -rf cache-folder
+        mkdir cache-folder
+        
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: cache-folder
+        key: ${{ runner.os }}-${{ github.sha }}-key
+
+    - name: Creating Content
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        cd cache-folder
+        dd if=/dev/urandom of=file.txt count=100 bs=1048576
+        cat file.txt | openssl dgst -sha256 > sha256.txt
