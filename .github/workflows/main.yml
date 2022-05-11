@@ -1,5 +1,7 @@
 name: Testing actions cache
-on: release
+on: 
+  release:
+    types: [created]
 jobs:
   CreateV3:
     runs-on: ubuntu-latest
@@ -20,7 +22,7 @@ jobs:
       id: cache
       with:
         path: cache-folder
-        key: ${{ runner.os }}-${{ github.sha }}-key
+        key: ${{ runner.os }}-${{ github.sha }}-key-1
 
     - name: Creating Content
       if: steps.cache.outputs.cache-hit != 'true'
