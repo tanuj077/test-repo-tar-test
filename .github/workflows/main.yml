@@ -20,7 +20,7 @@ jobs:
       id: cache
       with:
         path: D:\a\test-repo\test-repo\cache-folder
-        key: key
+        key: key-1
 #         key: ${{ runner.os }}-${{ github.sha }}-key-1
 
 #     - name: Creating Content
@@ -33,4 +33,4 @@ jobs:
     - name: Creating Content
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        fsutil file createnew cache-folder 2000 
+        fsutil file createnew cache-folder 2000000 
