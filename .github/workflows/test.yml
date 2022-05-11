@@ -15,7 +15,7 @@ jobs:
           dd if=/dev/urandom of=file.txt count=100 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           cd ../that
-          dd if=/dev/urandom of=file.txt count=100 bs=1048576
+          dd if=/dev/urandom of=file.txt count=50 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
         
@@ -23,9 +23,15 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: some-key
+          key: some-key-1
           path: | 
             this
+      - name: Setup some cache
+        id: some-cache-2
+        uses: actions/cache@v3
+        with:
+          key: some-key-1
+          path: | 
             that
 
       # Do stuff that populates the paths in the cache
@@ -56,5 +62,4 @@ jobs:
         with:
           key: some-key
           path: | 
-            this
             that
