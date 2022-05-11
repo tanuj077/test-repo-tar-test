@@ -20,7 +20,7 @@ jobs:
       id: cache
       with:
         path: D:\a\test-repo\test-repo\cache-folder
-        key: key-1
+        key: key-2
 #         key: ${{ runner.os }}-${{ github.sha }}-key-1
 
 #     - name: Creating Content
