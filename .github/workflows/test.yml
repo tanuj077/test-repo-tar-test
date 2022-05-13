@@ -23,14 +23,14 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: some-key-1
+          key: some-key-2
           path: | 
             this
       - name: Setup some cache
         id: some-cache-2
         uses: actions/cache@v3
         with:
-          key: some-key-1
+          key: some-key-2
           path: | 
             that
 
@@ -46,7 +46,7 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: some-key-1
+          key: some-key-2
           path: | 
             this
 
@@ -60,6 +60,6 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: some-key-1
+          key: some-key-2
           path: | 
             that
