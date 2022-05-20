@@ -12,11 +12,12 @@ jobs:
           dd if=/dev/urandom of=file.txt count=100 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
-        
+      - id: some
+        run: echo "::set-output name=dir::$(ImageOS)"
       - name: Setup some cache
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: ${{ echo $ImageOS }}-some-key
+          key: ${{ steps.some.outputs.dir }}-some-key
           path: | 
             this
