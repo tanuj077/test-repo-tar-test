@@ -1,9 +1,6 @@
 name: Example
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 jobs:
   some-job:
     name: Some Job
@@ -14,52 +11,12 @@ jobs:
           cd this
           dd if=/dev/urandom of=file.txt count=100 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
-          cd ../that
-          dd if=/dev/urandom of=file.txt count=50 bs=1048576
-          cat file.txt | openssl dgst -sha256 > sha256.txt
           
         
       - name: Setup some cache
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: some-key-2
+          key: ${{ env | grep ImageOS }}-some-key
           path: | 
             this
-      - name: Setup some cache
-        id: some-cache-2
-        uses: actions/cache@v3
-        with:
-          key: some-key-2
-          path: | 
-            that
-
-      # Do stuff that populates the paths in the cache
-
-  some-second-job:
-    name: Some Second Job
-    runs-on: ubuntu-latest
-    needs: [some-job]
-    steps:
-      # Results in a cache MISS
-      - name: Get some cache
-        id: some-cache
-        uses: actions/cache@v3
-        with:
-          key: some-key-2
-          path: | 
-            this
-
-  some-third-job:
-    name: Some Third Job
-    runs-on: ubuntu-latest
-    needs: [some-job]
-    steps:
-      # Results in a cache HIT
-      - name: Get some cache
-        id: some-cache
-        uses: actions/cache@v3
-        with:
-          key: some-key-2
-          path: | 
-            that
