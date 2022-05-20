@@ -17,6 +17,6 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: ${{ $ImageOS }}-some-key
+          key: ${{ ImageOS }}-some-key
           path: | 
             this
