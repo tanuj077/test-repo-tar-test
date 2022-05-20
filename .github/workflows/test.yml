@@ -13,7 +13,7 @@ jobs:
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
       - id: some
-        run: echo "::set-output name=dir::$(ImageOS)"
+        run: echo "::set-output name=dir::$(echo $ImageOS)"
       - name: Setup some cache
         id: some-cache
         uses: actions/cache@v3
