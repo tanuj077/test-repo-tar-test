@@ -11,3 +11,6 @@ jobs:
       - name: condition 2
         if: runner.os != 'Windows'
         run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."
+      
+      - name: env
+        run: env
