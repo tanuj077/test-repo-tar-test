@@ -2,15 +2,18 @@ name: Version of OS
 on: 
   workflow_dispatch:
 jobs:
-  if-Windows-else:
+  macos:
     runs-on: macos-latest
     steps:
-      - name: condition 1
-        if: runner.os == 'Windows'
-        run: echo "The operating system on the runner is $env:RUNNER_OS."
-      - name: condition 2
-        if: runner.os != 'Windows'
-        run: echo "The operating system on the runner is not Windows, it's $RUNNER_OS."
-      
+      - name: env
+        run: env
+  Linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: env
+        run: env
+  Windows:
+    runs-on: windows-latest
+    steps:
       - name: env
         run: env
