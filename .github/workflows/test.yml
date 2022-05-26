@@ -1,6 +1,9 @@
 name: Example
 on:
   workflow_dispatch:
+  push:
+    tags:
+      - v*
 jobs:
   some-job:
     name: Some Job
@@ -16,6 +19,6 @@ jobs:
         id: some-cache
         uses: actions/cache@v3
         with:
-          key: ${{ env.ImageOS }}-some-key
+          key: key-tag-haha
           path: | 
             this
