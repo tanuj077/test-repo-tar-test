@@ -1,24 +1,23 @@
 name: Example
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - v*
 jobs:
   some-job:
     name: Some Job
     runs-on: ubuntu-latest
     steps:
       - run: |
-          mkdir this that
-          cd this
+          mkdir cacheFolder
+          cd cacheFolder
           dd if=/dev/urandom of=file.txt count=100 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
-      - name: Setup some cache
-        id: some-cache
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
+        id: cache-test
         with:
-          key: key-tag-haha
-          path: | 
-            this
+          path: cacheFolder
+          key: cache-${{ github.run_id }}
+          restore-keys: cache-
+
+      - if: steps.cache-test.outputs.cache-hit != 'true'
+        run: echo "Not hit"
