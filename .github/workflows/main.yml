@@ -1,9 +1,10 @@
 name: GH Actions Test
 on:
-  pull_request:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+#   pull_request:
+#   push:
+#     branches:
+#       - main
 jobs:
   test:
     env:
@@ -12,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: try to restore cache from base branch
-        if: github.event_name == 'pull_request'
+#         if: github.event_name == 'pull_request'
         id: restore-cache
         uses: actions/cache@v3
         with:
