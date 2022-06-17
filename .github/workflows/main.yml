@@ -14,11 +14,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cacheFolder
-          key: ${{ runner.os }}-1
+          key: ${{ runner.os }}-2
       - name: debug
         run: |
             echo ${{ steps.restore-cache.outputs.cache-hit }}
             echo ${{ github.ref }}
       - name: create file
         run: |
-          mkdir cacheFolder 2>/dev/null && echo 'foo' > "cacheFolder/foo.txt"
+          mkdir -p cacheFolder 2>/dev/null && echo 'foo' > "cacheFolder/foo.txt"
