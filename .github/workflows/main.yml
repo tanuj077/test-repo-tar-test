@@ -24,7 +24,9 @@ jobs:
           path: ${{ env.HEAD_SHA }}
           key: ${{ runner.os }}-${{ env.HEAD_SHA }}
       - name: debug
-        run: echo ${{ steps.restore-cache.outputs.cache-hit }}
+        run: |
+            echo ${{ steps.restore-cache.outputs.cache-hit }}
+            echo ${{ github.ref }}
       - name: create file
         run: |
           mkdir $HEAD_SHA 2>/dev/null && echo 'foo' > "$HEAD_SHA/foo.txt"
