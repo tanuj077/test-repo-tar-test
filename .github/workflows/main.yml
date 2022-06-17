@@ -1,38 +1,30 @@
-name: python conda
-on: workflow_dispatch
-
-defaults:
-  run:
-    shell: bash -l {0}
-
+name: GH Actions Test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
-  foo:
+  test:
+    env:
+      BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+      HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Conda
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: MY_ENV
-          auto-activate-base: false
-
-      - name: Establish Conda environment directory
-        id: conda_env
-        run: |
-          conda info --json | jq -r '"::set-output name=dir::\(.envs_dirs[0])"'
-
-      - name: Setup Conda environment caching
-        id: cache
+      - name: try to restore cache from base branch
+        if: github.event_name == 'pull_request'
+        id: restore-cache
         uses: actions/cache@v3
-        env:
-          # Increase this to manually invalidate the cache
-          CACHE_NUMBER: 1
         with:
-          path: ~/conda_pkgs_dir
-          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml', 'requirements.txt') }}-${{ env.CACHE_NUMBER }}
-
-      - name: Update Conda environment
-        run: conda env update -n MY_ENV -f environment.yml
-        if: steps.cache.outputs.cache-hit != 'true'
+          path: ${{ env.BASE_SHA }}
+          key: ${{ runner.os }}-${{ env.BASE_SHA }}
+      - name: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.HEAD_SHA }}
+          key: ${{ runner.os }}-${{ env.HEAD_SHA }}
+      - name: debug
+        run: echo ${{ steps.restore-cache.outputs.cache-hit }}
+      - name: create file
+        run: |
+          mkdir $HEAD_SHA 2>/dev/null && echo 'foo' > "$HEAD_SHA/foo.txt"
