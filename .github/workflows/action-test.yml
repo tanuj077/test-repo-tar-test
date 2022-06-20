@@ -1,4 +1,4 @@
-name: GH Actions Test
+name: action test
 on:
   workflow_dispatch:
 jobs:
@@ -7,6 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: try to restore cache
-        run: echo 1234567890123456789012345678901234567999999
+        uses: actions/github-script@v5
+        with: 
+          script: return 1234567890123456789012345678901234567999999
+#         run: echo 1234567890123456789012345678901234567999999
 #         with:
 #           key: 1234567890123456789012345678901234567999999
