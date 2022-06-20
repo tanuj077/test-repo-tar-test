@@ -1,0 +1,11 @@
+name: 'test'
+description: ''
+author: 'me'
+inputs:
+  key:
+    description: 'An explicit key for restoring and saving the cache'
+    required: true
+runs:
+  using: 'ubuntu-latest'
+  steps:
+    - run: echo $INPUT_KEY
