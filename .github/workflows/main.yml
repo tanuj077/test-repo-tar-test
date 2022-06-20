@@ -14,7 +14,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cacheFolder
-          key: 1234567890123456789012345678901234567890122
+          key: 1234567890123456789012345678901234567999999
       - name: debug
         run: |
             echo ${{ steps.restore-cache.outputs.cache-hit }}
