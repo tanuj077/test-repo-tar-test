@@ -7,6 +7,6 @@ inputs:
     required: true
 runs:
   using: 'ubuntu-latest'
-  shell: /bin/bash
   steps:
     - run: echo $INPUT_KEY
+      shell: /bin/bash
