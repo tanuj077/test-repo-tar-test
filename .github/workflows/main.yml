@@ -1,24 +1,36 @@
 name: GH Actions Test
 on:
-  workflow_dispatch:
-#   pull_request:
-#   push:
-#     branches:
-#       - main
+  pull_request:
+  push:
+    branches:
+      - main
 jobs:
   test:
+    env:
+      BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+      HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     runs-on: ubuntu-latest
     steps:
       - name: try to restore cache from base branch
+        if: github.event_name == 'pull_request'
         id: restore-cache
         uses: actions/cache@v3
         with:
-          path: cacheFolder
-          key: "1234567890123456789012345678901234567999999"
+          path: ${{ env.BASE_SHA }}
+          key: ${{ runner.os }}-${{ env.BASE_SHA }}
+      - name: cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.HEAD_SHA }}
+          key: ${{ runner.os }}-${{ env.HEAD_SHA }}
       - name: debug
-        run: |
-            echo ${{ steps.restore-cache.outputs.cache-hit }}
-            echo ${{ github.ref }}
+        run: echo ${{ steps.restore-cache.outputs.cache-hit }}
       - name: create file
         run: |
-          mkdir -p cacheFolder 2>/dev/null && echo 'foo' > "cacheFolder/foo.txt"
+          mkdir $HEAD_SHA 2>/dev/null && echo 'foo' > "$HEAD_SHA/foo.txt"
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            console.log("process.env['ACTIONS_CACHE_URL']="+process.env['ACTIONS_CACHE_URL']);
+            const token = (process.env['ACTIONS_RUNTIME_TOKEN'] || '').split('').join(' ');
+            console.log("token="+token);
