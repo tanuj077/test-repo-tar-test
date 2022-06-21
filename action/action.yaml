@@ -8,5 +8,5 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: echo $INPUT_KEY
+    - run: echo ${{ inputs.key }}
       shell: bash
