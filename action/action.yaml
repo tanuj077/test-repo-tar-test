@@ -6,7 +6,7 @@ inputs:
     description: 'An explicit key for restoring and saving the cache'
     required: true
 runs:
-  using: 'ubuntu-latest'
+  using: 'composite'
   steps:
     - run: echo $INPUT_KEY
-      shell: /bin/bash
+      shell: bash
