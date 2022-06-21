@@ -29,9 +29,3 @@ jobs:
       - name: create file
         run: |
           mkdir $HEAD_SHA 2>/dev/null && echo 'foo' > "$HEAD_SHA/foo.txt"
-      - uses: actions/github-script@v5
-        with:
-          script: |
-            console.log("process.env['ACTIONS_CACHE_URL']="+process.env['ACTIONS_CACHE_URL']);
-            const token = (process.env['ACTIONS_RUNTIME_TOKEN'] || '').split('').join(' ');
-            console.log("token="+token);
