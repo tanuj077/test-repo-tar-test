@@ -34,3 +34,4 @@ jobs:
           dd if=/dev/zero of=./cachepath/file.img bs=1024 count=0 seek=$[1024*10]
           ls -la
           ls -la cachepath
+          pwd
