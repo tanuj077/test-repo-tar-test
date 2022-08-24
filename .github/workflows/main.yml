@@ -23,7 +23,7 @@ jobs:
         id: restore
         uses: actions/cache@v3
         with:
-          path: ./cachepath
+          path: ~/cachepath
           key: cache-key-3
       - name: debug
         run: echo ${{ steps.restore.outputs.cache-hit }}
