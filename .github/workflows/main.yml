@@ -23,15 +23,15 @@ jobs:
         id: restore
         uses: actions/cache@v3
         with:
-          path: /home/runner/work/test-repo/test-repo/cachepath/
+          path: ~/cachepath
           key: cache-key-3
       - name: debug
         run: echo ${{ steps.restore.outputs.cache-hit }}
       - name: create file
         run: |
-          mkdir /home/runner/work/test-repo/test-repo/cachepath
-          echo "foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar" > /home/runner/work/test-repo/test-repo/cachepath/file
-          dd if=/dev/zero of=/home/runner/work/test-repo/test-repo/cachepath/file.img bs=1024 count=0 seek=$[1024*10]
+          mkdir ~/cachepath
+          echo "foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar" > ~/cachepath/file
+          dd if=/dev/zero of=~/cachepath/file.img bs=1024 count=0 seek=$[1024*10]
           ls -la
-          ls -la cachepath
+          ls -la ~/cachepath
           pwd
