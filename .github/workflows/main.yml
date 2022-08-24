@@ -20,16 +20,17 @@ jobs:
           path: ${{ env.BASE_SHA }}
           key: ${{ runner.os }}-${{ env.BASE_SHA }}
       - name: cache
-        id: restore-cache1
+        id: restore
         uses: actions/cache@v3
         with:
           path: ./cachepath
-          key: cache-key-2
+          key: cache-key-3
       - name: debug
-        run: echo ${{ steps.restore-cache1.outputs.cache-hit }}
+        run: echo ${{ steps.restore.outputs.cache-hit }}
       - name: create file
         run: |
           mkdir cachepath
           echo "foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar" > ./cachepath/file
+          dd if=/dev/zero of=./cachepath/file.img bs=1024 count=0 seek=$[1024*10]
           ls -la
           ls -la cachepath
