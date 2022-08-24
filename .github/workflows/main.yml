@@ -22,10 +22,10 @@ jobs:
       - name: cache
         uses: actions/cache@v3
         with:
-          path: ${{ env.HEAD_SHA }}
+          path: cache-path
           key: cache-key
       - name: debug
         run: echo ${{ steps.restore-cache.outputs.cache-hit }}
       - name: create file
         run: |
-          mkdir $HEAD_SHA 2>/dev/null && echo 'foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar' > "$HEAD_SHA/foo.txt"
+          truncate -s 5M cache-path
