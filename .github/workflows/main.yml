@@ -23,9 +23,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.HEAD_SHA }}
-          key: ${{ runner.os }}-${{ env.HEAD_SHA }}
+          key: cache-key
       - name: debug
         run: echo ${{ steps.restore-cache.outputs.cache-hit }}
       - name: create file
         run: |
-          mkdir $HEAD_SHA 2>/dev/null && echo 'foo' > "$HEAD_SHA/foo.txt"
+          mkdir $HEAD_SHA 2>/dev/null && echo 'foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar' > "$HEAD_SHA/foo.txt"
