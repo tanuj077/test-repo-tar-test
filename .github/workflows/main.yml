@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cacheFolder
-          key: cache-key
+          key: cache-key-4
       - name: debug
         run: echo ${{ steps.restore.outputs.cache-hit }}
       - name: create file
