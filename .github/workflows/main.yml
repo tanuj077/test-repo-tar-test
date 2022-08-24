@@ -24,10 +24,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cacheFolder
-          key: cache-key-3
+          key: cache-key
       - name: debug
         run: echo ${{ steps.restore.outputs.cache-hit }}
       - name: create file
+        if: steps.restore.outputs.cache-hit != 'true'
         run: |
           mkdir cacheFolder
           cd cacheFolder
