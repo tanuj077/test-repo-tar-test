@@ -24,10 +24,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: cachepath
-          key: cache-key
+          key: cache-key-1
       - name: debug
         run: echo ${{ steps.restore-cache1.outputs.cache-hit }}
       - name: create file
         run: |
-          truncate -s 5M cachepath
+          mkdir cachepath
+          truncate -s 5M cachepath/file
           ls
