@@ -20,12 +20,14 @@ jobs:
           path: ${{ env.BASE_SHA }}
           key: ${{ runner.os }}-${{ env.BASE_SHA }}
       - name: cache
+        id: restore-cache1
         uses: actions/cache@v3
         with:
-          path: cache-path
+          path: cachepath
           key: cache-key
       - name: debug
-        run: echo ${{ steps.restore-cache.outputs.cache-hit }}
+        run: echo ${{ steps.restore-cache1.outputs.cache-hit }}
       - name: create file
         run: |
-          truncate -s 5M cache-path
+          truncate -s 5M cachepath
+          ls
