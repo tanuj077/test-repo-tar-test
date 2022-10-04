@@ -7,9 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          lfs: true
+          lfs: false
       - name: try to save cache
         uses: actions/cache@v3
         with: 
           key: Linux-${{ github.run_id }}
-          path: .
+          path: action
