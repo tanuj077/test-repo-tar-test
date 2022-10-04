@@ -1,6 +1,8 @@
 name: action test
 on:
   workflow_dispatch:
+env:
+  ACTIONS_STEP_DEBUG: true
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -9,9 +11,7 @@ jobs:
         with:
           lfs: true
       - name: try to save cache
-        env:
-          ACTIONS_STEP_DEBUG: true
         uses: actions/cache@v3
         with: 
-          key: Linux-1
+          key: Linux-2
           path: .
