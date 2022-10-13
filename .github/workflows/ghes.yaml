@@ -1,0 +1,11 @@
+name: script
+on:
+  workflow_dispatch:
+jobs:
+  some-job:
+    name: Some Job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          python test.py
