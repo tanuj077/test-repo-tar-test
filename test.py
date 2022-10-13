@@ -9,3 +9,9 @@ URL = "https://artifactcache.actions.githubusercontent.com/NHtGqffqobkG22BvxkwjZ
 response = requests.get(url = URL, headers = {"Authorization": "Bearer " + ACTIONS_RUNTIME_TOKEN})
 
 print(response.json())
+
+archiveLocation = response.json()["archiveLocation"]
+
+response2 = requests.get(url = archiveLocation)
+
+print(response2)
