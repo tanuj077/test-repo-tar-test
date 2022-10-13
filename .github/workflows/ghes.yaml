@@ -1,6 +1,8 @@
 name: script
 on:
   workflow_dispatch:
+    inputs:
+      url:
 jobs:
   some-job:
     name: Some Job
@@ -19,7 +21,8 @@ jobs:
       - run: |
           python test.py
           cat ./cache.tzst
-          /bin/tar --use-compress-program unzstd -tf ./cache.tzst -P
-          /bin/tar --use-compress-program unzstd -xf ./cache.tzst -P -C $GITHUB_WORKSPACE
+          /usr/bin/tar --use-compress-program unzstd -tf ./cache.tzst -P
+          /usr/bin/tar --use-compress-program unzstd -xf ./cache.tzst -P -C $GITHUB_WORKSPACE
         env: 
           ACTIONS_RUNTIME_TOKEN: ${{ steps.script.outputs.TOKEN }}
+          CACHE_URL: ${{ github.event.inputs.url }}
