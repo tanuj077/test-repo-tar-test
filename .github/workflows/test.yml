@@ -9,7 +9,7 @@ jobs:
       - run: |
           mkdir cacheFolder
           cd cacheFolder
-          dd if=/dev/urandom of=file.txt count=100 bs=1048576
+          dd if=/dev/urandom of=file.txt count=1 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
       - uses: actions/cache@v3
@@ -17,7 +17,7 @@ jobs:
         with:
           path: cacheFolder
           key: cache-${{ github.run_id }}
-          restore-keys: cache-
+#           restore-keys: cache-
 
       - if: steps.cache-test.outputs.cache-hit != 'true'
         run: echo "Not hit"
