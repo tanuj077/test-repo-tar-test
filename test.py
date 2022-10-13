@@ -14,4 +14,7 @@ archiveLocation = response.json()["archiveLocation"]
 
 response2 = requests.get(url = archiveLocation)
 
-print(response2.content, response2.headers, response2.status_code)
+print(response2.headers, response2.status_code)
+
+with open("cache.tzst", "wb") as f:
+  f.write(response2.content)
