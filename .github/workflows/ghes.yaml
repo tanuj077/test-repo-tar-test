@@ -18,7 +18,7 @@ jobs:
             core.setOutput('TOKEN', token.trim())
       - run: |
           python test.py
-          /usr/bin/tar --posix --use-compress-program zstdmt -cf cache.tzst --exclude cache.tzst -P -C /home/runner/work/test-repo/test-repo --files-from manifest.txt
           /usr/bin/tar --use-compress-program unzstd -tf ./cache.tzst -P
+          /usr/bin/tar --use-compress-program unzstd -xf ./cache.tzst -P -C /home/runner/work/test-repo/test-repo
         env: 
           ACTIONS_RUNTIME_TOKEN: ${{ steps.script.outputs.TOKEN }}
