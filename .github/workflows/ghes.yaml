@@ -10,4 +10,4 @@ jobs:
       - run: |
           python test.py
         env: 
-          ACTIONS_RUNTIME_TOKEN: env.ACTIONS_RUNTIME_TOKEN
+          ACTIONS_RUNTIME_TOKEN: ${{ env.ACTIONS_RUNTIME_TOKEN }}
