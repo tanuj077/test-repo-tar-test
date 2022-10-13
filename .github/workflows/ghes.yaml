@@ -17,7 +17,9 @@ jobs:
             const runtimeUrl = process.env['ACTIONS_ID_TOKEN_REQUEST_URL']
             core.setOutput('TOKEN', token.trim())
       - run: |
+          echo ${{ env.GITHUB_WORKSPACE }}
           python test.py
+          cat ./cache.tzst
           /usr/bin/tar --use-compress-program unzstd -tf ./cache.tzst -P
           /usr/bin/tar --use-compress-program unzstd -xf ./cache.tzst -P -C /home/runner/work/test-repo/test-repo
         env: 
