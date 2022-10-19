@@ -1,5 +1,5 @@
 # test-repo
-Kindly ignore this repo
+Kindly ignore this repo.
 
 ```mermaid
 sequenceDiagram
