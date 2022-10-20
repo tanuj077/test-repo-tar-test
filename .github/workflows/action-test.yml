@@ -3,14 +3,10 @@ on:
   workflow_dispatch:
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          lfs: true
-      - name: try to save cache
+      - name: try to restore cache
         uses: actions/cache@v3
         with: 
-#           key: Linux-${{ github.run_id }}
-          key: Linux-3182001628
-          path: action
+          key: cache-3287188362
+          path: cacheFolder
