@@ -9,7 +9,7 @@ jobs:
       - run: |
           mkdir cacheFolder
           cd cacheFolder
-          dd if=/dev/urandom of=file.txt count=100 bs=1048576
+          dd if=/dev/urandom of=file.txt count=2000 bs=1048576
           cat file.txt | openssl dgst -sha256 > sha256.txt
           
       - uses: actions/cache@v3
