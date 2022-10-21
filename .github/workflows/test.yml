@@ -11,7 +11,7 @@ jobs:
         shell: cmd
         run: |
           echo "Adding GNU tar to PATH"
-          echo C:\Program Files\Git\usr\bin >> "%GITHUB_PATH%"
+          echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
     
       - run: |
           mkdir cacheFolder
