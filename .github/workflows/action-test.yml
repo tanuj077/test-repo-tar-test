@@ -5,6 +5,12 @@ jobs:
   test:
     runs-on: windows-latest
     steps:
+      - if: ${{ runner.os == 'Windows' }}
+        name: Use GNU tar
+        shell: cmd
+        run: |
+          echo "Adding GNU tar to PATH"
+          echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
       - name: try to restore cache
         uses: actions/cache@v3
         with: 
