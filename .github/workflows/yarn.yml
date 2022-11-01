@@ -7,11 +7,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: git clone https://github.com/telescopejs/telescope.git
+      - run: |
+          #git clone https://github.com/telescopejs/telescope.git
+          git clone https://github.com/atom/atom.git
       - uses: actions/setup-node@v3
         with:
-          node-version: 12.x
+          node-version: 16.x
       - run: |
-          cd telescope
+          cd atom
           npm install
           du -sh node_modules
