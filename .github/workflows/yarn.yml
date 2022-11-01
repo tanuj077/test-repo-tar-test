@@ -14,5 +14,4 @@ jobs:
       - run: |
           cd telescope
           npm install
-          ls
-          du node_modules
+          du -sh node_modules
