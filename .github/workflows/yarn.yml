@@ -12,7 +12,7 @@ jobs:
           git clone https://github.com/atom/atom.git
       - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 12.x
       - run: |
           cd atom
           npm install
