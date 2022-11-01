@@ -1,4 +1,4 @@
-name: yarn
+name: node packages
 on: workflow_dispatch
 
 jobs:
@@ -7,16 +7,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - run: git clone https://github.com/telescopejs/telescope.git
       - uses: actions/setup-node@v3
         with:
           node-version: 12.x
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}-3
-      - if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn --prefer-offline
+      - run: |
+          cd telescope
+          npm install
+          ls
+          du node_modules
