@@ -28,3 +28,5 @@ jobs:
 
       - if: steps.cache-test.outputs.cache-hit != 'true'
         run: echo "Not hit"
+        
+      - run: env
