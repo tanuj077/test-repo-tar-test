@@ -8,5 +8,4 @@ jobs:
 
       - name: tar version?
         run: tar --version
-        shell: pwsh
 #         uses: mxschmitt/action-tmate@v3
