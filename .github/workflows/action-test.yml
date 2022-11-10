@@ -6,5 +6,7 @@ jobs:
     runs-on: windows-latest
     steps:
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      - name: tar version?
+        run: tar --version
+        shell: pwsh
+#         uses: mxschmitt/action-tmate@v3
