@@ -7,7 +7,7 @@ print(CACHE_URL)
 
 response = requests.get(url = CACHE_URL, headers = {"Authorization": "Bearer " + ACTIONS_RUNTIME_TOKEN})
 
-print(response.text, response.json())
+print(response.text)
 
 archiveLocation = response.json()["archiveLocation"]
 
