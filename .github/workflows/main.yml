@@ -1,36 +1,12 @@
-name: GH Actions Test
+name: API test
 on:
   workflow_dispatch:
-#   pull_request:
-#   push:
-#     branches:
-#       - main
 jobs:
   test:
-    env:
-      BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
-      HEAD_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     runs-on: ubuntu-latest
     steps:
-      - name: try to restore cache from base branch
-        if: github.event_name == 'pull_request'
-        id: restore-cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.BASE_SHA }}
-          key: ${{ runner.os }}-${{ env.BASE_SHA }}
-      - name: cache
-        id: restore
-        uses: actions/cache@v3
-        with:
-          path: cacheFolder
-          key: cache-key-4
-      - name: debug
-        run: echo ${{ steps.restore.outputs.cache-hit }}
-      - name: create file
-        if: steps.restore.outputs.cache-hit != 'true'
-        run: |
-          mkdir cacheFolder
-          cd cacheFolder
-          dd if=/dev/urandom of=file.txt count=100 bs=1048576
-          cat file.txt | openssl dgst -sha256 > sha256.txt
+      - run: |
+          curl \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/Phantsure/test-repo/actions/caches
