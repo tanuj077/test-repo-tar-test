@@ -2,7 +2,7 @@ name: API test
 on:
   workflow_dispatch:
 permissions:
-  contents:read
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
