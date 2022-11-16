@@ -6,6 +6,9 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: none
     steps:
       - run: |
           curl \
