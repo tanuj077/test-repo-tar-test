@@ -18,5 +18,5 @@ jobs:
           key: ${{ runner.os }}-apt-packages
       - name: Install Apt dependencies
         run: |
-          apt-get update
-          apt-get install -y liblua5.1-dev luarocks
+          apt update
+          apt install -y liblua5.1-dev luarocks
