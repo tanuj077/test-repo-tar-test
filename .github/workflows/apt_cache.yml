@@ -19,8 +19,8 @@ jobs:
       - name: Install Apt dependencies
         run: |
           mkdir bin
-          apt-get update
-          apt-get download liblua5.1-dev luarocks
+          sudo apt-get update
+          sudo apt-get download liblua5.1-dev luarocks
           ls
           dpkg -x liblua5.1-dev.deb ./bin
           dpkg -x luarocks.deb ./bin
