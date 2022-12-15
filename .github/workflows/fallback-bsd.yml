@@ -6,7 +6,7 @@ on:
 jobs:
   upload:
     runs-on: windows-latest
-    name: runner-cache upload (${{ runner.os }})
+    name: runner-cache upload
     steps:
     - uses: actions/checkout@v3
     - shell: bash
@@ -25,7 +25,7 @@ jobs:
   restore:
     needs: upload
     runs-on: windows-latest
-    name: runner-cache restore (${{ runner.os }})
+    name: runner-cache restore 
     steps:
     - uses: actions/checkout@v3
     - uses: actions/cache@v3.1.0-beta
