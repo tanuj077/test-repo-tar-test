@@ -20,7 +20,7 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: test-cache
-        key: ${{ matrix.os }}-runner-${{ github.run_number }}-${{ github.run_attempt }}
+        key: ${{ matrix.os }}-fallback-${{ github.run_number }}-${{ github.run_attempt }}
 
   restore:
     needs: upload
@@ -35,7 +35,7 @@ jobs:
       id: cache
       with:
         path: test-cache
-        key: ${{ matrix.os }}-runner-${{ github.run_number }}-${{ github.run_attempt }}
+        key: ${{ matrix.os }}-fallback-${{ github.run_number }}-${{ github.run_attempt }}
 
     - name: Fail if cache not found
       if: steps.cache.outputs.cache-hit != 'true'
