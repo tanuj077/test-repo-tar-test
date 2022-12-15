@@ -1,0 +1,41 @@
+name: BSD fallback on windows
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: windows-latest
+    name: runner-cache upload (${{ runner.os }})
+    steps:
+    - uses: actions/checkout@v3
+    - shell: bash
+      run: |
+        rm "C:\Program Files\Git\usr\bin\tar.exe"
+    - name: Create file to cache
+      shell: bash
+      run: |
+        mkdir test-cache
+        echo "foo" > test-cache/test.txt
+    - uses: actions/cache@v3.1.0-beta
+      with:
+        path: test-cache
+        key: ${{ runner.os }}-bsd-${{ github.run_number }}-${{ github.run_attempt }}
+
+  restore:
+    needs: upload
+    runs-on: windows-latest
+    name: runner-cache restore (${{ runner.os }})
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3.1.0-beta
+      id: cache
+      with:
+        path: test-cache
+        key: ${{ runner.os }}-bsd-${{ github.run_number }}-${{ github.run_attempt }}
+
+    - name: Fail if cache not found
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        echo "Cache not found, upload failed"
+        exit 1
