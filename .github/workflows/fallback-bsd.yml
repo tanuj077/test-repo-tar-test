@@ -17,7 +17,7 @@ jobs:
       run: |
         mkdir test-cache
         echo "foo" > test-cache/test.txt
-    - uses: actions/cache@main
+    - uses: actions/cache@v3.1.0-beta
       with:
         path: test-cache
         key: ${{ runner.os }}-bsd-${{ github.run_number }}-${{ github.run_attempt }}
