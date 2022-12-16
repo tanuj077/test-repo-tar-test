@@ -28,7 +28,7 @@ jobs:
     name: runner-cache restore 
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/cache@v3.1.0-beta
+    - uses: actions/cache@main
       id: cache
       with:
         path: test-cache
